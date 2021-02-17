@@ -1,0 +1,13 @@
+3c. frequency resolution = sample rate / duration of signal in samples
+    # ie. 44100 / len(x)
+
+
+3d. if we zero-pad the signal the same number of zeros as the length of the signal, 
+    frequency resolution = sample rate / 2 * len(x)
+    Thus the frequency bins become narrower in size resulting in increased frequency resolution on the DFT.
+
+
+
+4c. The rectangular spectrum definitely does look noisy in the higher frequencies for both the pure sine and square wave. However the Hanning window is much more cleaner and show clear harmonic lines for the square wave. The rectangular window due to it’s sudden 0 to 1 transition edges makes the spectrum muddy where the frequency lines are wavy and wide although we have used a pure wave. The rectangular windowed spectrum also has artifacts beyond the 10th harmonic (>7500 Hz unto 20kHz) which is unusual and makes it a bad choice for accurate frequency content representation.
+
+

@@ -60,6 +60,6 @@ if __name__ == "__main__":
     ax2.set_xlabel('Frequency (Rad)')
     ax2.set_ylabel('Amplitude')
     
-    plt.savefig('results/03-sinewave.png')
+    plt.savefig('results/03-squarewave.png')
     plt.show()
     

@@ -33,7 +33,7 @@ def computeSpectrum(x, sample_rate_Hz):
     mag = np.abs(dft) / len(x)
     ph = np.angle(dft)
 
-    return mag[0:int(len(x)/2)], np.unwrap(ph[0:int(len(x)/2)]), dft.real, dft.imag, np.fft.fftfreq(x.size)[0:int(len(x)/2)]
+    return mag[0:int(len(x)/2)], ph[0:int(len(x)/2)], dft.real, dft.imag, np.fft.fftfreq(x.size)[0:int(len(x)/2)]
 
 def generateBlocks(x, sample_rate_Hz, block_size, hop_size): 
     x_b = np.zeros([block_size, int (len(x) / hop_size)+1])
@@ -42,7 +42,6 @@ def generateBlocks(x, sample_rate_Hz, block_size, hop_size):
     for block in range(0, len(x), hop_size):
         t = np.append(t, block)
         x_b[:,int(block/hop_size)] = pad_x[block:block+block_size] 
-        # print(block)
     
     return t, x_b
 
@@ -68,10 +67,9 @@ def mySpecgram(x,  block_size, hop_size, sampling_rate_Hz, window_type):
         mag_specgram[:,b] = mag
     
     plt.specgram(x ,window = window, NFFT=block_size, Fs = sampling_rate_Hz, 
-                noverlap= (block_size-hop_size))
-    plt.savefig('results/04-square-rect.png')
+                noverlap= int(block_size-hop_size))
+    plt.savefig('results/04-sine-rect.png')
     plt.show()
-    
     
     return fr, t, mag_specgram
 
@@ -85,4 +83,4 @@ if __name__ == "__main__":
     t2, sq = generateSquare(amp, sr_Hz, frq_Hz, lnth_secs, ph_rad)
     block_size = 2048
     hop_size = 1024
-    fv, tv, spectrum = mySpecgram(sq, block_size, hop_size, sr_Hz, 'rect')
+    fv, tv, spectrum = mySpecgram(sin, block_size, hop_size, sr_Hz, 'rect')
